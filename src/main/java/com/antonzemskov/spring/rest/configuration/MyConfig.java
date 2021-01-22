@@ -35,7 +35,7 @@ public class MyConfig {
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        LocalSessionFactoryBean sessionFactory= new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan("com.antonzemskov.spring.rest.entity");
 
@@ -52,7 +52,6 @@ public class MyConfig {
     @Bean
     public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-
         transactionManager.setSessionFactory(sessionFactory().getObject());
 
         return transactionManager;
