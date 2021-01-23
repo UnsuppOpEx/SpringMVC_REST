@@ -4,6 +4,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -19,19 +20,31 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class MyConfig {
 
+//    @Bean
+//    public DataSource dataSource() {
+//        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+//        try {
+//            dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
+//            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/my_db?useSSL=false");
+//            dataSource.setUser("bestuser");
+//            dataSource.setPassword("bestuser");
+//        } catch (PropertyVetoException e) {
+//            e.printStackTrace();
+//        }
+//        return dataSource();
+//    }
+
+
     @Bean
     public DataSource dataSource() {
-        ComboPooledDataSource dataSource = new ComboPooledDataSource();
-        try {
-            dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-            dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/my_db?useSSL=false");
-            dataSource.setUser("bestuser");
-            dataSource.setPassword("bestuser");
-        } catch (PropertyVetoException e) {
-            e.printStackTrace();
-        }
-        return dataSource();
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/my_db?useSSL=false");
+        dataSource.setUsername("bestuser");
+        dataSource.setPassword("bestuser");
+        return dataSource;
     }
+
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
